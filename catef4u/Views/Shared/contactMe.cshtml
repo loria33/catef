@@ -1,0 +1,67 @@
+﻿@inherits UmbracoViewPage<catef4u.Models.ContactFormViewModel>
+
+@using (Html.BeginUmbracoForm("SubmitForm", "Contact", FormMethod.Post))
+{
+    <div class="comments-wrap">
+        <div id="comments" class="row">
+            <div class="col-full">
+                <!-- respond -->
+                <div class="respond">
+                    <h3>צור קשר</h3>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    @{ 
+                        
+                    }
+                        
+                    <fieldset>
+                        <div class="form-field">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "full-width", name = "cName", type = "text", id = "cName", placeholder = "השם שלך", value = "" })
+                        </div>
+                        <div class="form-field">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "full-width", name = "cMail", type = "email", id = "cMail", placeholder = "המייל שלך", value = "" })
+                        </div>
+                        <div class="message form-field">
+                            @Html.TextAreaFor(m => m.Message, new { @class = "full-width", name = "cMessage", type = "text", id = "cMessage", placeholder = "ההודעה שלך", value = "" })
+                        </div>
+                        <button type="submit" class="submit button-primary" name="Submit" value="Submit">שלח</button>
+                    </fieldset>
+                </div> <!-- Respond End -->
+            </div> <!-- end col-full -->
+        </div> <!-- end row comments -->
+    </div> <!-- end comments-wrap -->
+
+
+    @*<div class="comments-wrap">
+            <div id="comments" class="row">
+                <div class="col-full">
+
+                    <!-- respond -->
+                    <div class="respond">
+
+                        <h3>צור קשר</h3>
+
+
+                            <fieldset>
+
+                                <div class="form-field">
+                                    <input name="cName" type="text" id="cName" class="full-width" placeholder="השם שלך" value="">
+                                </div>
+            
+                                <div class="form-field">
+                                    <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="המייל שלך" value="">
+                                </div>
+
+                                <div class="message form-field">
+                                    <textarea name="cMessage" id="cMessage" class="full-width" placeholder="ההודעה שלך"></textarea>
+                                </div>
+
+                                <button type="submit" class="submit button-primary" name="Submit" value="Submit">Submit</button>
+
+                            </fieldset>
+                       </div> <!-- Respond End -->
+
+                </div> <!-- end col-full -->
+            </div> <!-- end row comments -->
+        </div> <!-- end comments-wrap -->*@
+}

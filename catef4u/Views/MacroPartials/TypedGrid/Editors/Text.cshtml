@@ -1,0 +1,36 @@
+﻿@using Skybrud.Umbraco.GridData.Values
+@using Skybrud.Umbraco.GridData.Config
+@using Skybrud.Umbraco.GridData.Rendering
+@inherits UmbracoViewPage<GridControlWrapper<GridControlTextValue, GridEditorTextConfig>>
+
+@if (Model.Config.HasMarkup) {
+
+    string markup = Model.Config.Markup;
+
+    markup = markup.Replace("#value#", Model.Value.ToString());
+    markup = markup.Replace("#style#", Model.Config.Style);
+
+    @Html.Raw(markup)
+
+}
+else
+{
+    <div class="entry-text">
+        <div class="entry-header">
+
+            <div class="entry-meta">
+                <span class="cat-links">
+                    <a href="#">Design</a>
+                    <a href="#">UI</a>
+                </span>
+            </div>
+
+            <h1 class="entry-title"><a href="single-standard.html">This Is Another Standard Format Post.</a></h1>
+
+        </div>
+        <div class="entry-excerpt">
+            <div style="@Model.Config.Style">@Model.Value</div>
+        </div>
+    </div>
+    
+}

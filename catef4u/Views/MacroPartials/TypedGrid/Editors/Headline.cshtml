@@ -1,0 +1,36 @@
+﻿@using Skybrud.Umbraco.GridData.Values
+@using Skybrud.Umbraco.GridData.Config
+@using Skybrud.Umbraco.GridData.Rendering
+@inherits UmbracoViewPage<GridControlWrapper<GridControlTextValue, GridEditorTextConfig>>
+
+@{
+    string markup;
+}
+@if (Model.Config.HasMarkup) {
+
+     markup = Model.Config.Markup;
+
+    markup = markup.Replace("#value#", Model.Value.ToString());
+    markup = markup.Replace("#style#", Model.Config.Style);
+}
+else
+{
+     markup = ""; 
+}
+
+    <div class="entry-text">
+        <div class="entry-header">
+            <h1 class="entry-title"><a href="single-standard.html">
+                @if (Model.Control.Editor.Alias == "quote")
+                {
+                    <span style="">@Html.Raw(markup)</span>
+                }
+                else
+                {
+                    <span>@Model.Value</span>
+                }      
+            </a></h1>
+
+        </div>
+    </div>
+    

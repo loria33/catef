@@ -1,0 +1,79 @@
+﻿@using Skybrud.Umbraco.GridData
+@using Skybrud.Umbraco.GridData.Extensions
+@using System;
+@using catef4u.Models;
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = "catefMaster.cshtml";
+}
+@{
+    var otherImages = Model.Content.GetPropertyValue<List<IPublishedContent>>("aboutPageBricks");
+}
+
+
+<section id="content-wrap" class="site-page">
+    <div class="row">
+        <div class="col-twelve">
+
+            <section>
+                @if(TempData["contactSuccess"] != null && (bool)TempData["contactSuccess"])
+                {
+                    <p>ההודעה נשלחה</p>
+                }
+                @{
+                    var imageid = Model.Content.GetPropertyValue("topAboutImg");
+                }
+                <div  class="content-media">
+                    <img src="@Umbraco.TypedMedia(imageid.ToString()).Url" alt="" />
+                </div>
+               
+                <div class="primary-content">
+
+                    <h1 class="entry-title add-bottom">אודות ד"ר אבי שזר</h1>
+
+                    <p class="lead">@Model.Content.GetPropertyValue("firstText")</p>
+
+                    <h3 class="entry-title add-bottom">@Model.Content.GetPropertyValue("medicalAccridsTitle")</h3>
+
+                    <p>@Model.Content.GetPropertyValue("medicalAccrids")</p>
+
+                    <h3 class="entry-title add-bottom">@Model.Content.GetPropertyValue("workTodayTitle")</h3>
+
+                    <p>@Model.Content.GetPropertyValue("workToday")</p>
+
+
+                    <div class="row block-1-2 block-tab-full">
+                        @{ 
+                            var abtindex = 0;
+                        }
+                        @foreach (var imgof in otherImages)
+                        {
+                            if (abtindex < 3) { 
+                                <div class="bgrid">
+                                    <img src="@Umbraco.TypedMedia(imgof.Id.ToString()).Url" class="aboutGrid" alt="" >
+                                </div>
+                              abtindex++;
+                            }
+                        }
+
+
+                    </div>
+                </div>
+            </section>
+
+        </div> <!-- end col-twelve -->
+    </div> <!-- end row -->
+    @{
+        if (TempData["contactSuccess"] != null && (bool)TempData["contactSuccess"])
+        {
+
+        }
+        else
+        {
+            Html.RenderAction("RenderForm", "Contact");
+        }
+
+    }
+</section> <!-- end content -->

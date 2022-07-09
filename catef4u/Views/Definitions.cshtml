@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+        Layout = "catefMaster.cshtml";
+}
+@{
+    IEnumerable<IPublishedContent> typedMultiNodeTreePicker;
+    typedMultiNodeTreePicker = Model.Content.GetPropertyValue<IEnumerable<IPublishedContent>>("multiPicker");   
+}
+   
+
+@* the fun starts here *@
+
+<div class="comments-wrap">
+    <div id="comments" class="row">
+        <div class="col-full">
+
+            <h1>מושגים</h1>
+              
+            @foreach (var item in typedMultiNodeTreePicker)
+            {
+            <!-- commentlist -->
+            <ol class="commentlist MainDiv">
+
+                <li class="depth-1">
+
+                    <div class="avatar">
+                        <img width="50" height="50" class="avatar" src="images/avatars/user-01.jpg" alt="">
+                    </div>
+
+                    <div class="comment-content">
+
+                        <div class="comment-info defintions_div">
+                            <cite class="definitions_titletext">@item.GetPropertyValue("definitionlbl")</cite>
+                        </div>
+                        <div class="comment-info defintions_div">
+                            <cite class="definitions_titletext">מונח מקצועי: @item.GetPropertyValue("definitionlbl_eng")</cite>
+                        </div>
+
+                        <div class="comment-text">
+                            <div class="definitions_msg">
+                                @item.GetPropertyValue("definition_text")
+                            </div>
+                        </div>
+
+                    </div>
+
+                </li>
+            </ol> <!-- Commentlist End -->
+            }<!-- respond -->
+        </div> <!-- end col-full -->
+    </div> <!-- end row comments -->
+</div> <!-- end comments-wrap -->

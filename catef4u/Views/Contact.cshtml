@@ -1,0 +1,29 @@
+﻿@using Skybrud.Umbraco.GridData
+@using Skybrud.Umbraco.GridData.Extensions
+@using System;
+@using catef4u.Models;
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = "catefMaster.cshtml";
+}
+<!-- content
+================================================== -->
+<section id="content-wrap" class="blog-single">
+    <div>
+        <img src="~/images/bbbg.png" alt="צילום כתף" />
+    </div>
+    @{
+        if (TempData["contactSuccess"] != null && (bool)TempData["contactSuccess"])
+        {
+            <p>ההודעה נשלחה</p>
+        }
+        else
+        {
+            Html.RenderAction("RenderForm", "Contact");
+        }
+
+    }
+
+</section> <!-- end content -->

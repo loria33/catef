@@ -1,0 +1,9 @@
+﻿@using Skybrud.Umbraco.GridData.Values
+@using Umbraco.Web.Templates
+@inherits UmbracoViewPage<Skybrud.Umbraco.GridData.Rendering.GridControlWrapper<GridControlRichTextValue>>
+
+<div class="entry-text">
+    <div class="entry-excerpt">
+        <div>@Html.Raw(TemplateUtilities.ParseInternalLinks(Model.Value.ToString()))</div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web
+
+
+@*
+    This snippet displays a list of links of the pages immediately under the top-most page in the content tree.
+    This is the home page for a standard website.
+    It also highlights the current active page/section in the navigation with the CSS class "current".
+*@
+
+@{ var selection = Model.Content.Site().Children.Where(x => x.IsVisible()).ToArray(); }
+
+@if (selection.Length > 0)
+{   
+        foreach (var item in selection)
+        {
+            <li class="@(item.IsAncestorOrSelf(Model.Content) ? "current" : null)">
+                
+                @if(@item.Name == "דף הבית") {
+                    <a href="/">@item.Name</a>
+                }
+                else {
+                <a href="@item.Url">@item.Name</a>  
+                }
+                @if (item.Children.Count() > 0)
+                {
+                    <ul class="sub-menu">
+                        @foreach (var chld in item.Children)
+                        {
+                            <li><a href="@chld.Url">@chld.Name</a></li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    
+}

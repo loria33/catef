@@ -1,0 +1,139 @@
+﻿@using Skybrud.Umbraco.GridData
+@using Skybrud.Umbraco.GridData.Extensions
+@using System;
+@using catef4u.Models;
+
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = "catefMaster.cshtml";
+}
+    <!-- content
+    ================================================== -->
+    <section id="content-wrap" class="blog-single">
+        <div class="row">
+            <div class="col-twelve">
+                @if(TempData["contactSuccess"] != null && (bool)TempData["contactSuccess"])
+                {
+                    <p>ההודעה נשלחה</p>
+                }
+                <article class="format-standard">
+                    @{
+                        var imageid = Model.Content.GetPropertyValue("topImage");
+                    }
+
+
+                    <div class="content-media">
+                        <div class="post-thumb">
+                            <img src="@Umbraco.TypedMedia(imageid.ToString()).Url" alt="" />
+                        </div>
+                    </div>
+
+                    <div class="primary-content">
+                        
+                       
+                        <h1 class="page-title">@Model.Content.GetPropertyValue("title")</h1>
+
+                        <ul class="entry-meta">
+                            <li class="date">@Model.Content.GetPropertyValue("dateofUpdate")</li>
+                            <li class="cat">@Model.Content.GetPropertyValue("englishHeader")</li>
+                        </ul>
+
+                        <p class="lead">@Model.Content.GetPropertyValue("firstParagraph")</p>
+
+                        <p>
+                            @{
+                                var otherImages = Model.Content.GetPropertyValue<List<IPublishedContent>>("brickImages");
+
+                                if (otherImages != null && otherImages.Count > 1)
+                                {
+                                    var picsInrow = 0;
+                                    if (otherImages.Count % 4 == 0)
+                                    {
+                                        picsInrow = 4;
+                                    }
+                                    else if (otherImages.Count % 3 == 0)
+                                    {
+                                        picsInrow = 3;
+                                    }
+                                    else if (otherImages.Count % 2 == 0)
+                                    {
+                                        picsInrow = 2;
+                                    }
+                                    if (picsInrow == 0 && otherImages.Count > 4)
+                                    {
+                                        picsInrow = 4;
+                                    }
+
+                                    var width = "t" + Math.Abs(Convert.ToInt16(100 / picsInrow)).ToString();
+                                    <div>
+                                        <div class="innerBrick">
+                                            @foreach (var imgof in otherImages)
+                                            {
+
+                                                <div class="innerBrickDiv @width">
+                                                    <img class="t_img" src="@Umbraco.TypedMedia(imgof.Id.ToString()).Url" alt="סוג ניתוח">
+                                                </div> <!-- end article -->
+                                            }
+
+                                        </div> <!-- end row -->
+
+                                    </div><!-- end bricks -->
+                                }
+                                else if (otherImages != null && otherImages.Count == 1)
+                                {
+                                    <div style="width:100%">
+                                        @foreach (var imgof in otherImages)
+                                        {
+                                            <div class="brick entry format-standard animate-this">
+                                                <div class="entry-thumb">
+                                                    <img src="@Umbraco.TypedMedia(imgof.Id.ToString()).Url" alt="סוג ניתוח">
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                }
+                            }
+
+                        <p class="tags">
+                            <span>Tags :</span>
+                            <a href="@Model.Content.Parent.Url">@Model.Content.Parent.Name</a>
+                        </p>
+                    </div> <!-- end entry-primary -->
+
+                    @{Html.RenderPartial("SmallNavi");}
+                </article>
+
+
+            </div> <!-- end col-twelve -->
+        </div> <!-- end row -->
+
+       @{
+           if(TempData["contactSuccess"] != null && (bool)TempData["contactSuccess"])
+           {
+               
+           }
+           else
+           {
+               Html.RenderAction("RenderForm", "Contact");
+           }
+
+       }
+
+    </section> <!-- end content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

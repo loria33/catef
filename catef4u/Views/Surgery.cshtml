@@ -1,0 +1,71 @@
+﻿@using Skybrud.Umbraco.GridData
+@using Skybrud.Umbraco.GridData.Extensions
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+	Layout = "catefMaster.cshtml";
+}
+@{
+    var otherImages = Model.Content.GetPropertyValue<List<IPublishedContent>>("Bricks");
+ }
+<!-- masonry
+================================================== -->
+@*<section id="bricks">
+
+    <div class="row masonry">
+
+        <!-- brick-wrapper -->
+        <div class="bricks-wrapper">
+
+            <div class="grid-sizer"></div>
+                @foreach(var imgof in otherImages)
+                {
+                  
+                 <article class="brick entry format-standard animate-this">
+
+                <div class="entry-thumb">
+                    <a href="single-standard.html" class="thumb-link">
+                        <img src="@Umbraco.TypedMedia(imgof.Id.ToString()).Url" alt="סוג ניתוח">
+                    </a>
+                </div>
+
+            </article> <!-- end article -->
+                }
+
+        </div> <!-- end brick-wrapper -->
+
+    </div> <!-- end row -->
+
+</section>*@ <!-- end bricks -->
+@{
+    GridDataModel grid = Model.Content.GetGridModel("MainGrid");
+}
+<div id="content-wrap">
+    @Html.GetTypedGridHtml(grid, "Fanoe")
+</div>
+
+<section id="content-wrap" class="blog-single">
+
+    @{
+        if (TempData["contactSuccess"] != null && (bool)TempData["contactSuccess"])
+        {
+            <p>ההודעה נשלחה</p>
+        }
+        else
+        {
+            Html.RenderAction("RenderForm", "Contact");
+        }
+
+    }
+
+</section> <!-- end content -->
+
+
+
+
+
+
+
+
+
+
