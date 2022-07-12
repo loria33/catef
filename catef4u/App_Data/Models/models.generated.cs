@@ -19,8 +19,8 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "791c7ffaf4bbb591")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4f25ff273c19a850")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -122,6 +122,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// randomBricks
+		///</summary>
+		[ImplementPropertyType("randomBricks")]
+		public IEnumerable<IPublishedContent> RandomBricks
+		{
+			get { return this.GetPropertyValue<IEnumerable<IPublishedContent>>("randomBricks"); }
+		}
+
+		///<summary>
 		/// SlidesPicker: Get Slides from contentData
 		///</summary>
 		[ImplementPropertyType("slidesPicker")]
@@ -137,6 +146,24 @@ namespace Umbraco.Web.PublishedContentModels
 		public string Title
 		{
 			get { return this.GetPropertyValue<string>("title"); }
+		}
+
+		///<summary>
+		/// videoImage
+		///</summary>
+		[ImplementPropertyType("videoImage")]
+		public IPublishedContent VideoImage
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("videoImage"); }
+		}
+
+		///<summary>
+		/// videoLink
+		///</summary>
+		[ImplementPropertyType("videoLink")]
+		public string VideoLink
+		{
+			get { return this.GetPropertyValue<string>("videoLink"); }
 		}
 	}
 
@@ -328,27 +355,27 @@ namespace Umbraco.Web.PublishedContentModels
 		/// First Text
 		///</summary>
 		[ImplementPropertyType("firstText")]
-		public string FirstText
+		public IHtmlString FirstText
 		{
-			get { return this.GetPropertyValue<string>("firstText"); }
+			get { return this.GetPropertyValue<IHtmlString>("firstText"); }
 		}
 
 		///<summary>
 		/// MedicalAccrids
 		///</summary>
 		[ImplementPropertyType("medicalAccrids")]
-		public string MedicalAccrids
+		public IHtmlString MedicalAccrids
 		{
-			get { return this.GetPropertyValue<string>("medicalAccrids"); }
+			get { return this.GetPropertyValue<IHtmlString>("medicalAccrids"); }
 		}
 
 		///<summary>
 		/// MedicalAccridsTitle
 		///</summary>
 		[ImplementPropertyType("medicalAccridsTitle")]
-		public string MedicalAccridsTitle
+		public IHtmlString MedicalAccridsTitle
 		{
-			get { return this.GetPropertyValue<string>("medicalAccridsTitle"); }
+			get { return this.GetPropertyValue<IHtmlString>("medicalAccridsTitle"); }
 		}
 
 		///<summary>
@@ -640,6 +667,139 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<AnatPage, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// AnatomyContentList: Add Anatomy blocks
+		///</summary>
+		[ImplementPropertyType("anatomyContentList")]
+		public IEnumerable<IPublishedContent> AnatomyContentList
+		{
+			get { return this.GetPropertyValue<IEnumerable<IPublishedContent>>("anatomyContentList"); }
+		}
+	}
+
+	/// <summary>AnatomyBlocksContent</summary>
+	[PublishedContentModel("anatomyBlocksContent")]
+	public partial class AnatomyBlocksContent : ContenData
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "anatomyBlocksContent";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public AnatomyBlocksContent(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<AnatomyBlocksContent, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// AnatomyLink: Add a link to an external website only
+		///</summary>
+		[ImplementPropertyType("anatomyLink")]
+		public string AnatomyLink
+		{
+			get { return this.GetPropertyValue<string>("anatomyLink"); }
+		}
+
+		///<summary>
+		/// AnatomyParagraph
+		///</summary>
+		[ImplementPropertyType("anatomyParagraph")]
+		public IHtmlString AnatomyParagraph
+		{
+			get { return this.GetPropertyValue<IHtmlString>("anatomyParagraph"); }
+		}
+
+		///<summary>
+		/// ImageAnatomy: Enter The Image for Anatomy
+		///</summary>
+		[ImplementPropertyType("imageAnatomy")]
+		public IPublishedContent ImageAnatomy
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("imageAnatomy"); }
+		}
+	}
+
+	/// <summary>HomeBricks</summary>
+	[PublishedContentModel("homeBricks_t")]
+	public partial class HomeBricks_t : ContenData
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "homeBricks_t";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public HomeBricks_t(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<HomeBricks_t, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// brickImage
+		///</summary>
+		[ImplementPropertyType("brickImage")]
+		public IPublishedContent BrickImage
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("brickImage"); }
+		}
+
+		///<summary>
+		/// brickLink: link to youtube or other page
+		///</summary>
+		[ImplementPropertyType("brickLink")]
+		public string BrickLink
+		{
+			get { return this.GetPropertyValue<string>("brickLink"); }
+		}
+
+		///<summary>
+		/// brickParagraph
+		///</summary>
+		[ImplementPropertyType("brickParagraph")]
+		public IHtmlString BrickParagraph
+		{
+			get { return this.GetPropertyValue<IHtmlString>("brickParagraph"); }
+		}
+
+		///<summary>
+		/// brickTitle: Title of brick under image
+		///</summary>
+		[ImplementPropertyType("brickTitle")]
+		public string BrickTitle
+		{
+			get { return this.GetPropertyValue<string>("brickTitle"); }
+		}
+
+		///<summary>
+		/// isVideo: is this a video or regular brick
+		///</summary>
+		[ImplementPropertyType("isVideo")]
+		public bool IsVideo
+		{
+			get { return this.GetPropertyValue<bool>("isVideo"); }
 		}
 	}
 

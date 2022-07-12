@@ -432,7 +432,6 @@
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
-    <Content Include="Media\Web.config" />
     <Content Include="config\umbracoSettings.config" />
     <Content Include="config\trees.config" />
     <Content Include="config\tinyMceConfig.config" />
@@ -471,6 +470,9 @@
     <Content Include="Views\Definitions.cshtml" />
     <Content Include="Views\Slides.cshtml" />
     <Content Include="Views\anatomyTemplate.cshtml" />
+    <None Include="Properties\PublishProfiles\catef4u.com - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\catef4u.com - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\godaddy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -486,6 +488,7 @@
     <Folder Include="images\mejs\" />
     <Folder Include="images\thumbs\gallery\" />
     <Folder Include="images\thumbs\single\gallery\" />
+    <Folder Include="Models\Media\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
